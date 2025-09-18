@@ -111,11 +111,4 @@ src/
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Future Enhancements
 
-- [ ] Add search and filter functionality
-- [ ] Implement email notifications for application updates
-- [ ] Add data export/import features
-- [ ] Integrate with real job board APIs
-- [ ] Add user profile management
-- [ ] Implement dark mode
