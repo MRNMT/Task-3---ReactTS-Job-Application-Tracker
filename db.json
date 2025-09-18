@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "testuser",
+      "password": "password"
+    }
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "userId": 1,
+      "company": "Tech Corp",
+      "role": "Software Engineer",
+      "status": "applied",
+      "dateApplied": "2023-09-01",
+      "details": "Exciting opportunity in a growing tech company."
+    }
+  ]
+}
