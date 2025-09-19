@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
     "./public/index.html"
@@ -8,9 +9,9 @@ module.exports = {
     extend: {
       colors: {
         status: {
-          applied: '#FBBF24', // Yellow
-          interviewed: '#22C55E', // Green
-          rejected: '#EF4444' // Red
+          applied: '#06310bff', // light gray for light mode
+          interviewed: '#6b7280', // gray
+          rejected: '#374151' // dark gray
         }
       },
       screens: {

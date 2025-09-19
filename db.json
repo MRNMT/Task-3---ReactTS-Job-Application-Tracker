@@ -4,6 +4,21 @@
       "id": 1,
       "username": "testuser",
       "password": "password"
+    },
+    {
+      "username": "nelsons@123",
+      "password": "777777",
+      "id": 2
+    },
+    {
+      "username": "lihle",
+      "password": "123456",
+      "id": 3
+    },
+    {
+      "username": "tttt",
+      "password": "888888",
+      "id": 4
     }
   ],
   "jobs": [
@@ -15,6 +30,51 @@
       "status": "applied",
       "dateApplied": "2023-09-01",
       "details": "Exciting opportunity in a growing tech company."
+    },
+    {
+      "company": "Tech Corp",
+      "role": "Software Engineer",
+      "status": "interviewed",
+      "dateApplied": "2025-09-18",
+      "details": "Exciting opportunity in a growing tech company.",
+      "userId": 2,
+      "id": 2
+    },
+    {
+      "company": "Tech Corp",
+      "role": "Software Engineer",
+      "status": "applied",
+      "dateApplied": "2025-09-18",
+      "details": "Exciting opportunity in a growing tech company.hfgfgfgfgf",
+      "userId": 2,
+      "id": 3
+    },
+    {
+      "company": "Tech Corp",
+      "role": "Software Engineer",
+      "status": "interviewed",
+      "dateApplied": "2025-09-18",
+      "details": "Exciting opportunity in a growing tech company.",
+      "userId": 3,
+      "id": 4
+    },
+    {
+      "company": "Tech Corp",
+      "role": "Software Engineer",
+      "status": "applied",
+      "dateApplied": "2025-09-18",
+      "details": "hhhh",
+      "userId": 4,
+      "id": 5
+    },
+    {
+      "company": "Tech Corp",
+      "role": "software developer",
+      "status": "interviewed",
+      "dateApplied": "2025-09-18",
+      "details": "vgvy",
+      "userId": 4,
+      "id": 6
     }
   ]
 }

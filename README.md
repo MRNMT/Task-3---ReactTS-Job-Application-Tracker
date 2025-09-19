@@ -16,7 +16,7 @@ A modern, responsive job application tracking application built with React, Type
 - **Frontend**: React 18, TypeScript, Tailwind CSS
 - **Backend**: JSON Server (for development)
 - **Routing**: React Router DOM
-- **HTTP Client**: Axios
+- **HTTP Client**: Axiosnpm run
 - **Build Tool**: Create React App
 
 ## Installation

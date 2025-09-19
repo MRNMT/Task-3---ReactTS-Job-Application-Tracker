@@ -125,28 +125,28 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8 bg-white dark:bg-black">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">My Job Applications</h1>
+        <h1 className="text-3xl font-bold text-black dark:text-white">My Job Applications</h1>
         <button
           onClick={() => setShowForm(true)}
-          className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition duration-300"
+          className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300"
         >
           Add New Job
         </button>
       </div>
 
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+        <div className="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded mb-6">
           {error}
         </div>
       )}
 
       {/* Search and Filters */}
-      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+      <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md mb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="search" className="block text-sm font-medium text-black dark:text-white mb-1">
               Search
             </label>
             <input
@@ -155,18 +155,18 @@ const Home: React.FC = () => {
               value={search}
               onChange={(e) => updateSearchParams('search', e.target.value)}
               placeholder="Search by company or role"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
             />
           </div>
           <div>
-            <label htmlFor="filter" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="filter" className="block text-sm font-medium text-black dark:text-white mb-1">
               Filter by Status
             </label>
             <select
               id="filter"
               value={filter}
               onChange={(e) => updateSearchParams('filter', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
             >
               <option value="all">All Status</option>
               <option value="applied">Applied</option>
@@ -175,14 +175,14 @@ const Home: React.FC = () => {
             </select>
           </div>
           <div>
-            <label htmlFor="sort" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="sort" className="block text-sm font-medium text-black dark:text-white mb-1">
               Sort by
             </label>
             <select
               id="sort"
               value={sort}
               onChange={(e) => updateSearchParams('sort', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
             >
               <option value="date-desc">Date Applied (Newest)</option>
               <option value="date-asc">Date Applied (Oldest)</option>
@@ -195,7 +195,7 @@ const Home: React.FC = () => {
       {/* Job Form Modal */}
       {(showForm || editingJob) && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white dark:bg-gray-900 rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
             <JobForm
               job={editingJob}
               onSubmit={editingJob ? handleUpdateJob : handleAddJob}
@@ -211,7 +211,7 @@ const Home: React.FC = () => {
       {/* Jobs List */}
       {filteredJobs.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-500 text-lg">No jobs found. Add your first job application!</p>
+          <p className="text-gray-500 dark:text-gray-400 text-lg">No jobs found. Add your first job application!</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

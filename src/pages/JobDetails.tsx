@@ -79,9 +79,9 @@ const JobDetails: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-4xl mx-auto px-4 py-8 bg-white dark:bg-black">
       {editing ? (
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
           <JobForm
             job={job}
             onSubmit={handleUpdateJob}
@@ -89,11 +89,11 @@ const JobDetails: React.FC = () => {
           />
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow-md p-8">
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-8">
           <div className="flex justify-between items-start mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{job.role}</h1>
-              <p className="text-xl text-gray-600 mb-4">{job.company}</p>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{job.role}</h1>
+              <p className="text-xl text-gray-600 dark:text-gray-400 mb-4">{job.company}</p>
             </div>
             <span className={`px-4 py-2 rounded-full text-white text-lg font-medium ${getStatusColor(job.status)}`}>
               {job.status.charAt(0).toUpperCase() + job.status.slice(1)}
@@ -102,38 +102,38 @@ const JobDetails: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Application Details</h3>
-              <p className="text-gray-700 mb-2"><strong>Date Applied:</strong> {new Date(job.dateApplied).toLocaleDateString()}</p>
-              <p className="text-gray-700"><strong>Status:</strong> {job.status.charAt(0).toUpperCase() + job.status.slice(1)}</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Application Details</h3>
+              <p className="text-gray-700 dark:text-gray-300 mb-2"><strong>Date Applied:</strong> {new Date(job.dateApplied).toLocaleDateString()}</p>
+              <p className="text-gray-700 dark:text-gray-300"><strong>Status:</strong> {job.status.charAt(0).toUpperCase() + job.status.slice(1)}</p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Job Information</h3>
-              <p className="text-gray-700 mb-2"><strong>Company:</strong> {job.company}</p>
-              <p className="text-gray-700"><strong>Role:</strong> {job.role}</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Job Information</h3>
+              <p className="text-gray-700 dark:text-gray-300 mb-2"><strong>Company:</strong> {job.company}</p>
+              <p className="text-gray-700 dark:text-gray-300"><strong>Role:</strong> {job.role}</p>
             </div>
           </div>
 
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Job Details</h3>
-            <p className="text-gray-700 whitespace-pre-wrap">{job.details || 'No additional details provided.'}</p>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Job Details</h3>
+            <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{job.details || 'No additional details provided.'}</p>
           </div>
 
           <div className="flex space-x-4">
             <button
               onClick={() => setEditing(true)}
-              className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+              className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300"
             >
               Edit Job
             </button>
             <button
               onClick={handleDeleteJob}
-              className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition duration-300"
+              className="bg-red-500 dark:bg-red-700 text-white px-6 py-2 rounded-md hover:bg-red-600 dark:hover:bg-red-800 transition duration-300"
             >
               Delete Job
             </button>
             <button
               onClick={() => navigate('/home')}
-              className="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition duration-300"
+              className="bg-gray-500 dark:bg-gray-700 text-white px-6 py-2 rounded-md hover:bg-gray-600 dark:hover:bg-gray-800 transition duration-300"
             >
               Back to Home
             </button>
