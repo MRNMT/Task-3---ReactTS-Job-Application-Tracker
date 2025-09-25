@@ -4,6 +4,8 @@ import { useAuth } from '../context/AuthContext';
 import { Job, api } from '../utils/api';
 import JobCard from '../components/JobCard';
 import JobForm from '../components/JobForm';
+import LoadingSpinner from '../components/LoadingSpinner';
+import Alert from '../components/Alert';
 
 const Home: React.FC = () => {
   const { user, isAuthenticated } = useAuth();
@@ -14,8 +16,10 @@ const Home: React.FC = () => {
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [editingJob, setEditingJob] = useState<Job | undefined>();
+  const [addingJob, setAddingJob] = useState(false);
 
   // URL params
   const search = searchParams.get('search') || '';
@@ -79,12 +83,18 @@ const Home: React.FC = () => {
 
   const handleAddJob = async (jobData: Omit<Job, 'id' | 'userId'>) => {
     if (!user) return;
+    setAddingJob(true);
     try {
       await api.createJob({ ...jobData, userId: user.id });
       setShowForm(false);
+      setSuccess('Job added successfully!');
+      setError('');
       fetchJobs();
     } catch (err) {
       setError('Failed to add job');
+      setSuccess('');
+    } finally {
+      setAddingJob(false);
     }
   };
 
@@ -93,9 +103,12 @@ const Home: React.FC = () => {
     try {
       await api.updateJob(editingJob.id, jobData);
       setEditingJob(undefined);
+      setSuccess('Job updated successfully!');
+      setError('');
       fetchJobs();
     } catch (err) {
       setError('Failed to update job');
+      setSuccess('');
     }
   };
 
@@ -103,9 +116,12 @@ const Home: React.FC = () => {
     if (window.confirm('Are you sure you want to delete this job?')) {
       try {
         await api.deleteJob(id);
+        setSuccess('Job deleted successfully!');
+        setError('');
         fetchJobs();
       } catch (err) {
         setError('Failed to delete job');
+        setSuccess('');
       }
     }
   };
@@ -130,15 +146,29 @@ const Home: React.FC = () => {
         <h1 className="text-3xl font-bold text-black dark:text-white">My Job Applications</h1>
         <button
           onClick={() => setShowForm(true)}
-          className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300"
+          disabled={addingJob}
+          className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
         >
-          Add New Job
+          {addingJob ? (
+            <>
+              <LoadingSpinner size="sm" color="white" />
+              <span className="ml-2">Adding...</span>
+            </>
+          ) : (
+            'Add New Job'
+          )}
         </button>
       </div>
 
       {error && (
         <div className="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-4 py-3 rounded mb-6">
           {error}
+        </div>
+      )}
+
+      {success && (
+        <div className="bg-green-100 dark:bg-green-900 border border-green-400 dark:border-green-600 text-green-700 dark:text-green-300 px-4 py-3 rounded mb-6">
+          {success}
         </div>
       )}
 

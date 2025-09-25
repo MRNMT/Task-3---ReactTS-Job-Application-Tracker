@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Job } from '../utils/api';
+import LoadingSpinner from './LoadingSpinner';
 
 interface JobFormProps {
   job?: Job;
   onSubmit: (jobData: Omit<Job, 'id' | 'userId'>) => void;
   onCancel: () => void;
+  isLoading?: boolean;
 }
 
-const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
+const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel, isLoading = false }) => {
   const [formData, setFormData] = useState({
     company: job?.company || '',
     role: job?.role || '',
@@ -133,14 +135,23 @@ const JobForm: React.FC<JobFormProps> = ({ job, onSubmit, onCancel }) => {
       <div className="flex space-x-4">
         <button
           type="submit"
-          className="flex-1 bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300"
+          disabled={isLoading}
+          className="flex-1 bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
         >
-          {job ? 'Update Job' : 'Add Job'}
+          {isLoading ? (
+            <>
+              <LoadingSpinner size="sm" color="white" />
+              <span className="ml-2">{job ? 'Updating Job...' : 'Adding Job...'}</span>
+            </>
+          ) : (
+            job ? 'Update Job' : 'Add Job'
+          )}
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="flex-1 bg-gray-500 dark:bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 dark:hover:bg-gray-800 transition duration-300"
+          disabled={isLoading}
+          className="flex-1 bg-gray-500 dark:bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 dark:hover:bg-gray-800 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Cancel
         </button>

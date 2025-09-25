@@ -19,6 +19,11 @@
       "username": "tttt",
       "password": "888888",
       "id": 4
+    },
+    {
+      "username": "plk",
+      "password": "111111",
+      "id": 5
     }
   ],
   "jobs": [
@@ -75,6 +80,15 @@
       "details": "vgvy",
       "userId": 4,
       "id": 6
+    },
+    {
+      "company": "Tech Corp",
+      "role": "Software Engineer",
+      "status": "applied",
+      "dateApplied": "2025-09-23",
+      "details": "gggg",
+      "userId": 5,
+      "id": 7
     }
   ]
 }

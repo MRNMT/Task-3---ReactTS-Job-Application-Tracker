@@ -36,7 +36,7 @@ const Register: React.FC = () => {
 
     const success = await register(username, password);
     if (success) {
-      navigate('/home');
+      navigate('/login-success');
     } else {
       setError('Registration failed. Username may already exist.');
     }

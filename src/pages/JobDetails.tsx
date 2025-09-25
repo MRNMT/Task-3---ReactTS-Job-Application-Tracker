@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Job, api } from '../utils/api';
 import JobForm from '../components/JobForm';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const JobDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -10,6 +11,8 @@ const JobDetails: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [editing, setEditing] = useState(false);
+  const [updating, setUpdating] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -30,23 +33,29 @@ const JobDetails: React.FC = () => {
 
   const handleUpdateJob = async (jobData: Omit<Job, 'id' | 'userId'>) => {
     if (!job) return;
+    setUpdating(true);
     try {
       await api.updateJob(job.id, jobData);
       setEditing(false);
       fetchJob(job.id);
     } catch (err) {
       setError('Failed to update job');
+    } finally {
+      setUpdating(false);
     }
   };
 
   const handleDeleteJob = async () => {
     if (!job) return;
     if (window.confirm('Are you sure you want to delete this job?')) {
+      setDeleting(true);
       try {
         await api.deleteJob(job.id);
         navigate('/home');
       } catch (err) {
         setError('Failed to delete job');
+      } finally {
+        setDeleting(false);
       }
     }
   };
@@ -121,19 +130,29 @@ const JobDetails: React.FC = () => {
           <div className="flex space-x-4">
             <button
               onClick={() => setEditing(true)}
-              className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300"
+              disabled={updating || deleting}
+              className="bg-black dark:bg-white text-white dark:text-black px-6 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-gray-200 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Edit Job
             </button>
             <button
               onClick={handleDeleteJob}
-              className="bg-red-500 dark:bg-red-700 text-white px-6 py-2 rounded-md hover:bg-red-600 dark:hover:bg-red-800 transition duration-300"
+              disabled={deleting}
+              className="bg-red-500 dark:bg-red-700 text-white px-6 py-2 rounded-md hover:bg-red-600 dark:hover:bg-red-800 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             >
-              Delete Job
+              {deleting ? (
+                <>
+                  <LoadingSpinner size="sm" color="white" />
+                  <span className="ml-2">Deleting...</span>
+                </>
+              ) : (
+                'Delete Job'
+              )}
             </button>
             <button
               onClick={() => navigate('/home')}
-              className="bg-gray-500 dark:bg-gray-700 text-white px-6 py-2 rounded-md hover:bg-gray-600 dark:hover:bg-gray-800 transition duration-300"
+              disabled={updating || deleting}
+              className="bg-gray-500 dark:bg-gray-700 text-white px-6 py-2 rounded-md hover:bg-gray-600 dark:hover:bg-gray-800 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Back to Home
             </button>

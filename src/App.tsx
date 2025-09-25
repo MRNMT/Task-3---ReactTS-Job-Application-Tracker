@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import LoginSuccess from './pages/LoginSuccess';
+import LogoutSuccess from './pages/LogoutSuccess';
 import Home from './pages/Home';
 import JobDetails from './pages/JobDetails';
 import NotFound from './pages/NotFound';
@@ -36,6 +38,8 @@ function App() {
               <Route path="/" element={<Landing />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/login-success" element={<LoginSuccess />} />
+              <Route path="/logout-success" element={<LogoutSuccess />} />
               <Route path="/home" element={<Home />} />
               <Route path="/job/:id" element={<JobDetails />} />
               <Route path="*" element={<NotFound />} />
